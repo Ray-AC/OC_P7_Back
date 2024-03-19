@@ -1,29 +1,20 @@
+import io
+import lime
+import pickle #
+import base64
+import joblib
+import warnings #
 import numpy as np
 import pandas as pd
 import seaborn as sns
-import matplotlib.pyplot as plt
-from fastapi import FastAPI, HTTPException
-import pickle
-
 import lightgbm as lgb
-from lightgbm import LGBMClassifier
-import joblib
-import json
-import io
-import base64
-
-from fastapi.responses import StreamingResponse
-
-import gc
-from contextlib import contextmanager
-import time
-from lightgbm import LGBMClassifier
-import warnings
-from sklearn.model_selection import KFold, StratifiedKFold, train_test_split
-from sklearn.metrics import roc_auc_score
-from bs4 import BeautifulSoup
-import lime
 import lime.lime_tabular
+import matplotlib.pyplot as plt
+from lightgbm import LGBMClassifier
+from sklearn.metrics import roc_auc_score
+from fastapi import FastAPI, HTTPException
+from sklearn.model_selection import KFold, StratifiedKFold, train_test_split
+
 app = FastAPI() #check query parameters
 
 final_dataframe = pd.read_csv("D:/Downloads/final_dataframe.csv")
@@ -35,9 +26,6 @@ best_lgb = joblib.load('D:/Downloads/best_lightgbm_model.pkl')
 with open("D:/Downloads/data_drift.png", "rb") as file:
     image_content = file.read()
 
-'''with open('D:/Downloads/OC/P7/report.html', 'r') as file:
-    report_data_drift = file.read()'''
-
 indice_sk_id_curr = {}
 # Parcourir chaque ligne du DataFrame df_usable
 for index, row in dataframe_for_dic_for_lime.iterrows():
@@ -46,13 +34,11 @@ for index, row in dataframe_for_dic_for_lime.iterrows():
     # Associer l'indice au sk-id-curr dans le dictionnaire
     indice_sk_id_curr[index] = sk_id_curr_value
 
-
 # Création d'un explainer LIME
 explainer = lime.lime_tabular.LimeTabularExplainer(dataframe_for_lime.drop(columns=['target']).values,
                                                 feature_names=dataframe_for_lime.drop(columns=['target']).columns,
                                                 class_names=['Non-Default', 'Default'],
                                                 discretize_continuous=True)
-
 
 @app.get("/")
 async def root():
@@ -164,11 +150,6 @@ async def summary_stats_plot(sk_id_to_display: int):
 async def data_drift():
     image_base64 = base64.b64encode(image_content).decode()
     return image_base64
-
-'''@app.get("/data_drift")
-async def data_drift():
-    soup = BeautifulSoup(report_data_drift, 'html.parser')
-    return soup'''
 
 @app.get("/interpratibilite")
 async def interpratibilite(sk_id_curr_value: int):

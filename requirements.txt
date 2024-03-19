@@ -1,0 +1,9 @@
+fastapi
+joblib
+lime
+matplotlib
+numpy
+pandas
+seaborn
+lightgbm
+scikit-learn
