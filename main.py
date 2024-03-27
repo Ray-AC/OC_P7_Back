@@ -191,11 +191,11 @@ async def interpratibilite(sk_id_curr_value: int):
     explanation_base64 = base64.b64encode(buffer.getvalue()).decode()
     return explanation_base64
 
-# Récupérer le port fourni par Heroku
+'''# Récupérer le port fourni par Heroku
 port = int(os.environ.get('PORT', 8000))
 
 # Modifier l'appel à FastAPI pour utiliser le port récupéré
 if __name__ == "__main__":
     # Utiliser uvicorn pour démarrer le serveur FastAPI sur le port spécifié
     import uvicorn
-    uvicorn.run(app, host='0.0.0.0', port=port)
+    uvicorn.run(app, host='0.0.0.0', port=port)'''
