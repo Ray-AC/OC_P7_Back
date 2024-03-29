@@ -19,7 +19,7 @@ from sklearn.model_selection import KFold, StratifiedKFold, train_test_split
 app = FastAPI() #check query parameters
 
 final_dataframe = pd.read_csv("./data/final_dataframe.csv.gz")
-predict_df = pd.read_csv("./data/predict.csv.gz")
+predict_df = pd.read_csv("./data/predict.csv")
 dataframe_for_dic_for_lime_part1 = pd.read_csv("./data/dataframe_for_dic_for_lime_part1.csv.gz")
 dataframe_for_dic_for_lime_part2 = pd.read_csv("./data/dataframe_for_dic_for_lime_part2.csv.gz")
 dataframe_for_dic_for_lime = pd.concat([dataframe_for_dic_for_lime_part1, dataframe_for_dic_for_lime_part2])
